@@ -8,39 +8,53 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header with mobile menu button -->
-    <header class="header">
-        <div class="container">
-            <div class="logo-container">
-                <img src="logo.jpg" alt="Logo" class="logo">
-                <div class="logo-text">
-                    <h1>SCIENCE CLINIC UGANDA</h1>
-                    <p>Advancing Science Education for All</p>
-                </div>
-            </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header>
+  
 
-    <!-- Sliding mobile menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="close-menu-btn" id="closeMenuBtn">
-            <i class="fas fa-times"></i>
-        </button>
-        <nav class="mobile-nav">
+    <!-- Add this after the <body> tag -->
+<header class="main-header">
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Logo" class="logo">
+            <div class="logo-text">
+                <h1>SCIENCE CLINIC UGANDA</h1>
+                <p>Advancing Science Education for All</p>
+            </div>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li class="auth-buttons" id="mobileAuthButtons">
-                    <!-- Auth buttons will be injected here -->
-                </li>
             </ul>
         </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
+</header>
+
+<!-- Mobile Sidebar Menu -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+        <button class="close-menu-btn" id="closeMenuBtn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <nav class="mobile-nav-content">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="menu-overlay" id="menuOverlay"></div>
 
 
     <!-- Announcements Slider -->
