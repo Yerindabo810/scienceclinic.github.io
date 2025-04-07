@@ -105,7 +105,30 @@
     // Initial auth check
     updateAuthState();
 </script>
+<!-- Add this right before closing </body> tag -->
+<script src="auth.js"></script>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const errorMessage = document.getElementById('loginError');
+        errorMessage.textContent = '';
 
+        try {
+            const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            
+            Auth.login(email, password);
+            updateAuthUI();
+            window.location.href = 'index.html';
+        } catch (error) {
+            errorMessage.textContent = error.message;
+            errorMessage.style.display = 'block';
+        }
+    });
+
+    // Initialize auth UI
+    updateAuthUI();
+</script>
     <!-- Footer -->
     <footer class="footer">
         <!-- Copy footer section from index.html -->
