@@ -20,6 +20,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             <a href="login.html" class="btn btn-login">Sign In</a>
                             <a href="register.html" class="btn btn-primary">Sign Up</a>
                         </li>
+                        // Inside the navigation HTML
+<li class="auth-buttons">
+    ${Auth.isAuthenticated() ? `
+        <span class="welcome">Welcome, ${Auth.currentUser?.email}</span>
+        <button class="btn btn-logout" onclick="Auth.logout()">Logout</button>
+    ` : `
+        <a href="login.html" class="btn btn-login">Sign In</a>
+        <a href="register.html" class="btn btn-primary">Sign Up</a>
+    `}
+</li>
                     </ul>
                     <div class="mobile-menu-btn">
                         <i class="fas fa-bars"></i>
