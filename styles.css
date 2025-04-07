@@ -1187,3 +1187,32 @@ img {
         padding: 2rem;
     }
 }
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 15px 0;
+    display: none;
+    border: 1px solid #f5c6cb;
+}
+
+.welcome {
+    color: #003366;
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.btn-logout {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: #bb2d3b;
+}
