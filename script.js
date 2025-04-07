@@ -129,3 +129,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Add to existing Auth object
+const Auth = {
+    // ... existing code ...
+    
+    register(email, password) {
+        if (this.users.some(user => user.email === email)) {
+            throw new Error('User already exists');
+        }
+        
+        const newUser = {
+            email: email.toLowerCase().trim(),
+            password: password.trim(),
+            joined: new Date().toISOString()
+        };
+        
+        this.users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(this.users));
+        
+        // Automatically log in after registration
+        this.login(email, password);
+        
+        // Redirect to home page
+        window.location.href = 'index.html';
+    },
+
+    // ... rest of existing Auth object ...
+};
+
+// Add form handling for registration
+function handleRegistration(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    try {
+        if (password !== confirmPassword) {
+            throw new Error('Passwords do not match');
+        }
+        
+        Auth.register(email, password);
+        alert('Registration successful! You are now logged in.');
+    } catch (error) {
+        alert(error.message);
+    }
+}
