@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="logo-container">
-                <img src="logo.jpg" alt="Science Clinic Uganda Logo" class="logo">
+                <img src="logo.jpeg" alt="Science Clinic Uganda Logo" class="logo">
                 <div class="logo-text">
                     <h1>SCIENCE CLINIC UGANDA</h1>
                     <p>Advancing Science Education for All</p>
@@ -25,15 +24,13 @@
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li class="auth-buttons" id="authButtons">
-                        <a href="login.html" class="btn btn-login">Sign In</a>
-                        <a href="register.html" class="btn btn-primary">Sign Up</a>
+                        <!-- Auth buttons will be injected here -->
                     </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Registration Content -->
     <section class="auth-section">
         <div class="container">
             <div class="auth-container">
@@ -77,15 +74,32 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <!-- Your footer content here -->
+            <!-- Your footer content -->
         </div>
     </footer>
 
     <script>
-        // User Registration System
+        // Initialize auth state
+        function updateAuthState() {
+            const authButtons = document.getElementById('authButtons');
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            
+            if(currentUser) {
+                authButtons.innerHTML = `
+                    <span class="welcome">Welcome, ${currentUser.fullName}</span>
+                    <button class="btn btn-logout" onclick="logout()">Logout</button>
+                `;
+            } else {
+                authButtons.innerHTML = `
+                    <a href="login.html" class="btn btn-login">Sign In</a>
+                    <a href="register.html" class="btn btn-primary">Sign Up</a>
+                `;
+            }
+        }
+
+        // Registration handler
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -95,24 +109,20 @@
             const confirmPassword = document.getElementById('confirmPassword').value;
             const errorMessage = document.getElementById('errorMessage');
 
-            // Reset error message
+            // Reset errors
             errorMessage.textContent = '';
             errorMessage.style.display = 'none';
 
-            // Validate password match
-            if (password !== confirmPassword) {
-                errorMessage.textContent = 'Passwords do not match!';
-                errorMessage.style.display = 'block';
+            // Validate inputs
+            if(password !== confirmPassword) {
+                showError('Passwords do not match!');
                 return;
             }
 
             // Check existing users
             const users = JSON.parse(localStorage.getItem('users') || [];
-            const userExists = users.some(user => user.email === email);
-            
-            if (userExists) {
-                errorMessage.textContent = 'User already exists with this email!';
-                errorMessage.style.display = 'block';
+            if(users.some(user => user.email === email)) {
+                showError('User already exists with this email!');
                 return;
             }
 
@@ -120,43 +130,34 @@
             const newUser = {
                 fullName,
                 email,
-                password, // Note: In real applications, hash passwords
+                password, // Note: In real app, hash passwords
                 joined: new Date().toISOString()
             };
 
-            // Save to localStorage
+            // Save user
             users.push(newUser);
             localStorage.setItem('users', JSON.stringify(users));
-
-            // Automatically log in user
             sessionStorage.setItem('currentUser', JSON.stringify(newUser));
 
-            // Update UI
-            document.getElementById('authButtons').innerHTML = `
-                <span class="welcome">Welcome, ${newUser.fullName}</span>
-                <button class="btn btn-logout" onclick="logout()">Logout</button>
-            `;
-
-            // Redirect to home page
+            // Update UI and redirect
+            updateAuthState();
             window.location.href = 'index.html';
         });
 
-        // Logout function
         function logout() {
             sessionStorage.removeItem('currentUser');
+            updateAuthState();
             window.location.href = 'login.html';
         }
 
-        // Check existing session on page load
-        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-        if (currentUser) {
-            document.getElementById('authButtons').innerHTML = `
-                <span class="welcome">Welcome, ${currentUser.fullName}</span>
-                <button class="btn btn-logout" onclick="logout()">Logout</button>
-            `;
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
         }
-    </script>
 
-    <script src="script.js"></script>
+        // Initial auth state check
+        updateAuthState();
+    </script>
 </body>
 </html>
