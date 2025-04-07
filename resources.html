@@ -3,67 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Resources - Science Clinic Uganda</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Educational Resources - Science Clinic Uganda</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <!-- Copy header section from index.html -->
-    </header>
+    <!-- Navigation Header -->
 
-    <!-- Resources Content -->
-    <section class="resources-section">
-        <div class="container">
-            <h2 class="section-title">Educational Resources</h2>
-            
-            <div class="resource-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="physics">Physics</button>
-                <button class="filter-btn" data-filter="chemistry">Chemistry</button>
-                <button class="filter-btn" data-filter="biology">Biology</button>
-                <button class="filter-btn" data-filter="mathematics">Mathematics</button>
-            </div>
+    <main class="resources-container">
+        <h1>O-Level Study Resources</h1>
 
-            <div class="resources-grid">
-                <div class="resource-card" data-category="physics">
-                    <div class="resource-icon">
-                        <i class="fas fa-atom"></i>
-                    </div>
-                    <h3>Physics Practical Guides</h3>
-                    <p>Complete guide to O-Level physics practical experiments.</p>
-                    <a href="#" class="btn btn-secondary">Download PDF</a>
-                </div>
-                
-                <div class="resource-card" data-category="chemistry">
-                    <div class="resource-icon">
-                        <i class="fas fa-vial"></i>
-                    </div>
-                    <h3>Chemistry Lab Manual</h3>
-                    <p>Step-by-step instructions for common chemistry experiments.</p>
-                    <a href="#" class="btn btn-secondary">Download PDF</a>
+        <!-- Physics Section -->
+        <div class="subject-card">
+            <h2>Physics Notes</h2>
+            <div class="topic-list">
+                <div class="topic-card">
+                    <h3>1. Measurements and Units</h3>
+                    <ul>
+                        <li>Fundamental quantities (mass, length, time)</li>
+                        <li>SI units and conversions</li>
+                        <li>Measuring instruments (vernier calipers, micrometer)</li>
+                    </ul>
+                    <a href="pdfs/physics-measurements.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
                 </div>
 
-                <div class="resource-card" data-category="biology">
-                    <div class="resource-icon">
-                        <i class="fas fa-dna"></i>
-                    </div>
-                    <h3>Biology Diagrams Book</h3>
-                    <p>Collection of labeled biological diagrams for quick revision.</p>
-                    <a href="#" class="btn btn-secondary">Download PDF</a>
+                <div class="topic-card">
+                    <h3>2. Forces and Motion</h3>
+                    <ul>
+                        <li>Newton's laws of motion</li>
+                        <li>Speed vs velocity calculations</li>
+                        <li>Acceleration formulas</li>
+                    </ul>
+                    <a href="pdfs/physics-forces.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
                 </div>
-
-                <!-- Add more resource cards as needed -->
             </div>
         </div>
-    </section>
+
+        <!-- Chemistry Section -->
+        <div class="subject-card">
+            <h2>Chemistry Notes</h2>
+            <div class="topic-list">
+                <div class="topic-card">
+                    <h3>1. Atomic Structure</h3>
+                    <ul>
+                        <li>Protons, neutrons, electrons</li>
+                        <li>Periodic table organization</li>
+                        <li>Electron configuration</li>
+                    </ul>
+                    <a href="pdfs/chemistry-atomic.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
+                </div>
+
+                <div class="topic-card">
+                    <h3>2. Chemical Reactions</h3>
+                    <ul>
+                        <li>Balancing equations</li>
+                        <li>Types of reactions</li>
+                        <li>Stoichiometry basics</li>
+                    </ul>
+                    <a href="pdfs/chemistry-reactions.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Biology Section -->
+        <div class="subject-card">
+            <h2>Biology Notes</h2>
+            <div class="topic-list">
+                <div class="topic-card">
+                    <h3>1. Cell Structure</h3>
+                    <ul>
+                        <li>Plant vs animal cells</li>
+                        <li>Organelles and functions</li>
+                        <li>Microscope techniques</li>
+                    </ul>
+                    <a href="pdfs/biology-cells.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
+                </div>
+
+                <div class="topic-card">
+                    <h3>2. Human Nutrition</h3>
+                    <ul>
+                        <li>Digestive system</li>
+                        <li>Balanced diet components</li>
+                        <li>Enzyme functions</li>
+                    </ul>
+                    <a href="pdfs/biology-nutrition.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mathematics Section -->
+        <div class="subject-card">
+            <h2>Mathematics Notes</h2>
+            <div class="topic-list">
+                <div class="topic-card">
+                    <h3>1. Algebra Basics</h3>
+                    <ul>
+                        <li>Solving equations</li>
+                        <li>Factorization methods</li>
+                        <li>Quadratic equations</li>
+                    </ul>
+                    <a href="pdfs/math-algebra.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
+                </div>
+
+                <div class="topic-card">
+                    <h3>2. Geometry</h3>
+                    <ul>
+                        <li>Angle properties</li>
+                        <li>Triangle theorems</li>
+                        <li>Circle geometry</li>
+                    </ul>
+                    <a href="pdfs/math-geometry.pdf" class="download-btn">
+                        <i class="fas fa-download"></i> Download Notes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <!-- Copy footer section from index.html -->
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
