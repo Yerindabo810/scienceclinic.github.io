@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if navigation already exists
     if (!document.querySelector('.header')) {
-        // Insert header navigation
         const navHTML = `
         <header class="header">
             <div class="container">
                 <div class="logo-container">
-                    <img src="https://placehold.co/300x100/003366/FFFFFF?text=SCU+Logo" alt="Science Clinic Uganda Logo" class="logo">
+                    <img src="logo.jpg" alt="Science Clinic Uganda Logo" class="logo">
                     <div class="logo-text">
                         <h1>SCIENCE CLINIC UGANDA</h1>
                         <p>Advancing Science Education for All</p>
