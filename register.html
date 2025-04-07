@@ -11,7 +11,7 @@
     <header class="header">
         <div class="container">
             <div class="logo-container">
-                <img src="logo.jpeg" alt="Science Clinic Uganda Logo" class="logo">
+                <img src="logo.jpg" alt="Logo" class="logo">
                 <div class="logo-text">
                     <h1>SCIENCE CLINIC UGANDA</h1>
                     <p>Advancing Science Education for All</p>
@@ -76,20 +76,50 @@
 
     <footer class="footer">
         <div class="container">
-            <!-- Your footer content -->
+            <!-- Footer content -->
         </div>
     </footer>
 
     <script>
-        // Initialize auth state
-        function updateAuthState() {
-            const authButtons = document.getElementById('authButtons');
-            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        // User management functions
+        const Auth = {
+            users: JSON.parse(localStorage.getItem('users') || '[]'),
             
-            if(currentUser) {
+            register(user) {
+                if (this.users.some(u => u.email === user.email)) {
+                    throw new Error('User already exists with this email');
+                }
+                this.users.push(user);
+                localStorage.setItem('users', JSON.stringify(this.users));
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
+            },
+
+            login(email, password) {
+                const user = this.users.find(u => 
+                    u.email === email && u.password === password
+                );
+                if (!user) throw new Error('Invalid credentials');
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
+            },
+
+            logout() {
+                sessionStorage.removeItem('currentUser');
+            },
+
+            getCurrentUser() {
+                return JSON.parse(sessionStorage.getItem('currentUser'));
+            }
+        };
+
+        // Update authentication UI
+        function updateAuthUI() {
+            const authButtons = document.getElementById('authButtons');
+            const user = Auth.getCurrentUser();
+            
+            if (user) {
                 authButtons.innerHTML = `
-                    <span class="welcome">Welcome, ${currentUser.fullName}</span>
-                    <button class="btn btn-logout" onclick="logout()">Logout</button>
+                    <span class="welcome">Welcome, ${user.fullName}</span>
+                    <button class="btn btn-logout" onclick="Auth.logout(); window.location.href='index.html'">Logout</button>
                 `;
             } else {
                 authButtons.innerHTML = `
@@ -102,62 +132,33 @@
         // Registration handler
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value.toLowerCase();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
             const errorMessage = document.getElementById('errorMessage');
-
-            // Reset errors
             errorMessage.textContent = '';
-            errorMessage.style.display = 'none';
+            
+            try {
+                const userData = {
+                    fullName: document.getElementById('fullName').value.trim(),
+                    email: document.getElementById('email').value.toLowerCase().trim(),
+                    password: document.getElementById('password').value.trim(),
+                };
 
-            // Validate inputs
-            if(password !== confirmPassword) {
-                showError('Passwords do not match!');
-                return;
+                if (userData.password !== document.getElementById('confirmPassword').value.trim()) {
+                    throw new Error('Passwords do not match');
+                }
+
+                Auth.register(userData);
+                updateAuthUI();
+                window.location.href = 'index.html';
+                
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+                console.error('Registration error:', error);
             }
-
-            // Check existing users
-            const users = JSON.parse(localStorage.getItem('users') || [];
-            if(users.some(user => user.email === email)) {
-                showError('User already exists with this email!');
-                return;
-            }
-
-            // Create new user
-            const newUser = {
-                fullName,
-                email,
-                password, // Note: In real app, hash passwords
-                joined: new Date().toISOString()
-            };
-
-            // Save user
-            users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
-            sessionStorage.setItem('currentUser', JSON.stringify(newUser));
-
-            // Update UI and redirect
-            updateAuthState();
-            window.location.href = 'index.html';
         });
 
-        function logout() {
-            sessionStorage.removeItem('currentUser');
-            updateAuthState();
-            window.location.href = 'login.html';
-        }
-
-        function showError(message) {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-        }
-
-        // Initial auth state check
-        updateAuthState();
+        // Initial UI update
+        updateAuthUI();
     </script>
 </body>
 </html>
