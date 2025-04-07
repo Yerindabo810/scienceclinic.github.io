@@ -176,3 +176,53 @@ function handleRegistration(event) {
         alert(error.message);
     }
 }
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNav = document.getElementById('mobileNav');
+const closeMenuBtn = document.getElementById('closeMenuBtn');
+const menuOverlay = document.getElementById('menuOverlay');
+
+function toggleMobileMenu() {
+    mobileNav.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+    document.body.classList.toggle('no-scroll');
+}
+
+[mobileMenuBtn, closeMenuBtn, menuOverlay].forEach(element => {
+    element.addEventListener('click', toggleMobileMenu);
+});
+
+// Close menu when clicking navigation links
+document.querySelectorAll('.mobile-nav-content a').forEach(link => {
+    link.addEventListener('click', toggleMobileMenu);
+});
+
+// Update auth buttons in both menus
+function updateAuthUI() {
+    const user = Auth.getCurrentUser();
+    const desktopAuth = document.getElementById('desktopAuth');
+    const mobileAuth = document.getElementById('mobileAuth');
+
+    if (user) {
+        desktopAuth.innerHTML = `
+            <span class="welcome">Welcome, ${user.fullName}</span>
+            <button class="btn btn-logout" onclick="Auth.logout(); window.location.reload()">Logout</button>
+        `;
+        mobileAuth.innerHTML = `
+            <span class="welcome">Welcome, ${user.fullName}</span>
+            <button class="btn btn-logout" onclick="Auth.logout(); window.location.reload()">Logout</button>
+        `;
+    } else {
+        desktopAuth.innerHTML = `
+            <a href="login.html" class="btn btn-login">Sign In</a>
+            <a href="register.html" class="btn btn-primary">Sign Up</a>
+        `;
+        mobileAuth.innerHTML = `
+            <a href="login.html" class="btn btn-login">Sign In</a>
+            <a href="register.html" class="btn btn-primary">Sign Up</a>
+        `;
+    }
+}
+
+// Initialize
+updateAuthUI();
