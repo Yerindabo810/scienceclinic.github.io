@@ -160,5 +160,36 @@
         // Initial UI update
         updateAuthUI();
     </script>
+    <!-- Add this right before closing </body> tag -->
+<script src="auth.js"></script>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = '';
+
+        try {
+            const user = {
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.toLowerCase().trim(),
+                password: document.getElementById('password').value.trim()
+            };
+
+            if (user.password !== document.getElementById('confirmPassword').value.trim()) {
+                throw new Error('Passwords do not match');
+            }
+
+            Auth.register(user);
+            updateAuthUI();
+            window.location.href = 'index.html';
+        } catch (error) {
+            errorMessage.textContent = error.message;
+            errorMessage.style.display = 'block';
+        }
+    });
+
+    // Initialize auth UI
+    updateAuthUI();
+</script>
 </body>
 </html>
