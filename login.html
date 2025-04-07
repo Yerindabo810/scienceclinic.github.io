@@ -16,6 +16,8 @@
     <!-- Login Content -->
    <!-- Similar header/footer structure as register.html -->
 
+<!-- Similar header/footer structure as register.html -->
+
 <section class="auth-section">
     <div class="container">
         <div class="auth-container">
@@ -44,6 +46,32 @@
         </div>
     </div>
 </section>
+
+<script>
+        // Use the same Auth object and updateAuthUI function
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const errorMessage = document.getElementById('loginError');
+            errorMessage.textContent = '';
+
+            try {
+                const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+                const password = document.getElementById('loginPassword').value.trim();
+                
+                Auth.login(email, password);
+                updateAuthUI();
+                window.location.href = 'index.html';
+                
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+                console.error('Login error:', error);
+            }
+        });
+
+        updateAuthUI();
+</script>
 
 <script>
     // Same updateAuthState() and logout() functions as register.html
