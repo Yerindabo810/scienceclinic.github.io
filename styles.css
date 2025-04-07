@@ -1216,3 +1216,67 @@ img {
 .btn-logout:hover {
     background: #bb2d3b;
 }
+/* Resources Page Styling */
+.resources-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.subject-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.topic-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.topic-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.topic-card h3 {
+    color: #003366;
+    margin-bottom: 0.5rem;
+}
+
+.topic-card ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.topic-card li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #003366;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.fa-download {
+    font-size: 0.9rem;
+}
